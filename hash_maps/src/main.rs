@@ -9,11 +9,15 @@ fn main() {
     loop {
         print_help();
         let cmd_line = read_cmd_line();
-        if cmd_line.len() < 2 {
+        if cmd_line.len() <= 2 {
             if cmd_line[0] == "list" {
-                println!("Which department would you like to list?");
-                let cmd_line = read_cmd_line();
-                company.list_persons_from_department(&cmd_line[0]);
+                if cmd_line.len() == 2 {
+                    company.list_persons_from_department(&cmd_line[1]);
+                } else {
+                    println!("Which department would you like to list?");
+                    let cmd_line = read_cmd_line();
+                    company.list_persons_from_department(&cmd_line[0]);
+                }
             } else {
                 panic!("Can't understand command")
             }
